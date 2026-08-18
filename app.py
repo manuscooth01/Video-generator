@@ -10,9 +10,11 @@ st.title("🎬 Generador de Video con IA")
 st.write("Escribe un prompt y genera un video usando HunyuanVideo.")
 
 prompt = st.text_input("Prompt", "Un astronauta montando un caballo en Marte, estilo cinematográfico")
-frames = st.slider("Número de frames", min_value=8, max_value=60, value=24)
+video_length = st.selectbox("Longitud de video", [49, 73, 97, 129])
 width = st.selectbox("Ancho", [512, 640, 720, 768, 832, 896, 960, 1024], index=2)
 height = st.selectbox("Alto", [320, 384, 480, 512, 576, 640, 704, 768], index=2)
+infer_steps = st.slider("Pasos de inferencia", min_value=1, max_value=50, value=20)
+fps = st.slider("FPS", min_value=1, max_value=30, value=8)
 
 if st.button("Generar video"):
     with st.spinner("Generando video... (puede tardar 1-5 minutos)"):
@@ -21,9 +23,11 @@ if st.button("Generar video"):
                 "tencent/hunyuan-video",
                 input={
                     "prompt": prompt,
-                    "num_frames": frames,
+                    "video_length": video_length,
                     "width": width,
                     "height": height,
+                    "infer_steps": infer_steps,
+                    "fps": fps,
                 }
             )
             if isinstance(output, list):
