@@ -20,7 +20,7 @@ if st.button("Generar video"):
     with st.spinner("Generando video... (puede tardar 1-5 minutos)"):
         try:
             output = replicate.run(
-                "tencent/hunyuan-video",
+                "tencent/hunyuan-video:6c9132aee14409cd6568d030453f1ba50f5f3412b844fe67f78a9eb62d55664f",
                 input={
                     "prompt": prompt,
                     "video_length": video_length,
